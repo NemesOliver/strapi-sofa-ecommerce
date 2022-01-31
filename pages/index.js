@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import { MdOutlineDoubleArrow } from "react-icons/md";
 
 export default function Home() {
   return (
@@ -23,8 +24,8 @@ export default function Home() {
               priority
             />
           </div>
-          <button className="text-[18px] font-bold hover:text-gray-700 transition self-end ">
-            EXPLORE NOW
+          <button className="text-[18px] font-bold hover:text-gray-700 transition self-end flex items-center ">
+            EXPLORE NOW <MdOutlineDoubleArrow />
           </button>
         </section>
       </main>
