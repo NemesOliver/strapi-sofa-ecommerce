@@ -1,2 +1,1 @@
-export * from "./links/links";
-export * from "./useIsPageActive/useIsPageActive";
+export * from "./links/Links";
