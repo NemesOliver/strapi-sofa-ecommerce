@@ -10,6 +10,10 @@ export const Links = ({ closeNavigation }) => {
       href: "/",
     },
     {
+      name: "Explore",
+      href: "/shop/products",
+    },
+    {
       name: "About",
       href: "/about",
     },

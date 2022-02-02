@@ -27,8 +27,8 @@ export default function Home() {
                 priority
               />
             </div>
-            {/* button used once through the application */}
-            <Link passHref href="/">
+            {/* CTA button used once through the application */}
+            <Link passHref href="/shop/products">
               <a className="text-[18px] font-bold hover:text-gray-700 transition self-end mr-[10px] container:mr-0 flex items-center ">
                 EXPLORE NOW <MdOutlineDoubleArrow />
               </a>
