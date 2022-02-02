@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Header, Navigation } from "../../components";
 
 export const Layout = ({ children }) => {
@@ -9,7 +10,7 @@ export const Layout = ({ children }) => {
   return (
     <>
       <Header navOpen={navOpen} toggleNavigation={toggleNavigation} />
-      {navOpen && <Navigation />}
+      <AnimatePresence>{navOpen && <Navigation />}</AnimatePresence>
       {children}
     </>
   );

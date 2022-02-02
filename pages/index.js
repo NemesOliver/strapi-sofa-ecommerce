@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import { Container } from "../components";
 import { MdOutlineDoubleArrow } from "react-icons/md";
 
 export default function Home() {
@@ -11,24 +12,26 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <section className="max-w-[1440px] mx-auto h-[calc(100vh-60px)] flex flex-col justify-evenly text-center">
-          <h1 className="text-[40px] font-caption font-medium sm:text-[70px] md:text-[100px] lg:text-[135px]  ">
-            Be Mini<span className="text-[#82AB2C]">malis</span>m.
-          </h1>
-          <div className="relative h-[300px] lg:h-[500px]">
-            <Image
-              src={"/landing-page-picutre-no-bg.webp"}
-              alt="Minimalistic modern sofa"
-              layout="fill"
-              objectFit="cover"
-              priority
-            />
-          </div>
-          {/* button used once through the application */}
-          <button className="text-[18px] font-bold hover:text-gray-700 transition self-end flex items-center ">
-            EXPLORE NOW <MdOutlineDoubleArrow />
-          </button>
-        </section>
+        <Container>
+          <section className="h-[calc(100vh-60px)] flex flex-col justify-evenly text-center">
+            <h1 className="text-[40px] font-caption font-medium sm:text-[70px] md:text-[100px] lg:text-[135px]  ">
+              Be Mini<span className="text-[#82AB2C]">malis</span>m.
+            </h1>
+            <div className="relative h-[300px] lg:h-[500px]">
+              <Image
+                src={"/landing-page-picutre-no-bg.webp"}
+                alt="Minimalistic modern sofa"
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
+            </div>
+            {/* button used once through the application */}
+            <button className="text-[18px] font-bold hover:text-gray-700 transition self-end mr-[10px] container:mr-0 flex items-center ">
+              EXPLORE NOW <MdOutlineDoubleArrow />
+            </button>
+          </section>
+        </Container>
       </main>
     </>
   );

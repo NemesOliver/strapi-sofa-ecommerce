@@ -10,6 +10,10 @@ module.exports = {
       },
       colors: {
         primary: "#82AB2C",
+        background: "#efefef",
+      },
+      screens: {
+        container: "1440px",
       },
     },
   },

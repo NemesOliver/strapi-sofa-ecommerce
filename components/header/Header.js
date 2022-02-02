@@ -5,7 +5,7 @@ import { IoClose as MenuClose } from "react-icons/io5";
 
 export const Header = ({ navOpen, toggleNavigation }) => {
   return (
-    <header className="max-w-[1440px] mx-auto h-[60px] flex items-center ">
+    <header className="max-w-[1440px] mx-auto px-[10px] h-[60px] flex items-center container:px-0 ">
       <Link href="/" passHref>
         <a className="text-2xl font-medium flex-1 ">Malis.</a>
       </Link>
