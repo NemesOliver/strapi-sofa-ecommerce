@@ -1,16 +1,20 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { Header, Navigation } from "../../components";
+import { useNavigation } from "./libs";
 
 export const Layout = ({ children }) => {
-  const [navOpen, setNavOpen] = useState(true);
-
-  const toggleNavigation = () => setNavOpen(!navOpen);
+  const { navOpen, toggleNavigation, closeNavigation } = useNavigation();
 
   return (
     <>
-      <Header navOpen={navOpen} toggleNavigation={toggleNavigation} />
-      <AnimatePresence>{navOpen && <Navigation />}</AnimatePresence>
+      <Header
+        navOpen={navOpen}
+        toggleNavigation={toggleNavigation}
+        closeNavigation={closeNavigation}
+      />
+      <AnimatePresence>
+        {navOpen && <Navigation closeNavigation={closeNavigation} />}
+      </AnimatePresence>
       {children}
     </>
   );

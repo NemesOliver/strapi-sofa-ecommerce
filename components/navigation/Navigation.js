@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Links } from "./libs";
 
-export const Navigation = () => {
+export const Navigation = ({ closeNavigation }) => {
   return (
     <motion.nav
       key="navigation"
@@ -11,7 +11,7 @@ export const Navigation = () => {
       transition={{ duration: 0.2, type: "tween" }}
       className="fixed z-10 bottom-0 left-0 bg-background w-screen h-[calc(100vh-60px)] grid place-items-center"
     >
-      <Links />
+      <Links closeNavigation={closeNavigation} />
     </motion.nav>
   );
 };
