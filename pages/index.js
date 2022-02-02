@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Container } from "../components";
 import { MdOutlineDoubleArrow } from "react-icons/md";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -27,9 +28,11 @@ export default function Home() {
               />
             </div>
             {/* button used once through the application */}
-            <button className="text-[18px] font-bold hover:text-gray-700 transition self-end mr-[10px] container:mr-0 flex items-center ">
-              EXPLORE NOW <MdOutlineDoubleArrow />
-            </button>
+            <Link passHref href="/">
+              <a className="text-[18px] font-bold hover:text-gray-700 transition self-end mr-[10px] container:mr-0 flex items-center ">
+                EXPLORE NOW <MdOutlineDoubleArrow />
+              </a>
+            </Link>
           </section>
         </Container>
       </main>
