@@ -1,6 +1,9 @@
-export const IconButton = ({ children }) => {
+export const IconButton = ({ children, onClick }) => {
   return (
-    <button className="flex justify-between items-center w-[90px] text-2xl font-light hover:text-[#82AB2C]  transition-all ">
+    <button
+      onClick={onClick}
+      className=" hover:text-[#82AB2C]  transition-all "
+    >
       {children}
     </button>
   );

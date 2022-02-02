@@ -24,6 +24,7 @@ export default function Home() {
               priority
             />
           </div>
+          {/* button used once through the application */}
           <button className="text-[18px] font-bold hover:text-gray-700 transition self-end flex items-center ">
             EXPLORE NOW <MdOutlineDoubleArrow />
           </button>
