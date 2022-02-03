@@ -1,27 +1,27 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+const navLinks = [
+  {
+    name: "Home",
+    href: "/",
+  },
+  {
+    name: "Explore",
+    href: "/shop/products",
+  },
+  {
+    name: "About",
+    href: "/about",
+  },
+  {
+    name: "Contact",
+    href: "/contact",
+  },
+];
+
 export const Links = ({ closeNavigation }) => {
   const router = useRouter();
-
-  const navLinks = [
-    {
-      name: "Home",
-      href: "/",
-    },
-    {
-      name: "Explore",
-      href: "/shop/products",
-    },
-    {
-      name: "About",
-      href: "/about",
-    },
-    {
-      name: "Contact",
-      href: "/contact",
-    },
-  ];
 
   return (
     <ul>

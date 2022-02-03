@@ -1,19 +1,11 @@
-import React from "react";
+import { Categories } from "./libs";
 
 export const Sidebar = () => {
   return (
     <section className="hidden sm:flex h-[calc(100vh-60px)] flex-col justify-between">
       <div>
         <h2 className="text-[1.8rem] my-5">Category</h2>
-        <ul>
-          <li className="cursor-pointer hover:text-primary transition">All</li>
-          <li className="cursor-pointer hover:text-primary transition">
-            Sofa beds
-          </li>
-          <li className="cursor-pointer hover:text-primary transition">
-            Corner sofas
-          </li>
-        </ul>
+        <Categories/>
       </div>
       <div>
         <p className="text-[18px]">
