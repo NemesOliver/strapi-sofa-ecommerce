@@ -5,7 +5,7 @@ export const Sidebar = () => {
     <section className="hidden sm:flex h-[calc(100vh-60px)] flex-col justify-between">
       <div>
         <h2 className="text-[1.8rem] my-5">Category</h2>
-        <Categories/>
+        <Categories />
       </div>
       <div>
         <p className="text-[18px]">
