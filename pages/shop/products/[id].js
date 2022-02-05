@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { Container, Product, ProductDescription } from "../../../components";
+import url from "../../../strapi_url/url";
 
-const ProductPage = () => {
+const ProductPage = ({ product }) => {
   return (
     <>
       <Head>
@@ -12,8 +13,8 @@ const ProductPage = () => {
       <main className="h-[calc(100vh-60px)] grid place-items-center">
         <Container>
           <div className="grid lg:grid-cols-2 gap-4">
-            <Product />
-            <ProductDescription />
+            <Product product={product} />
+            <ProductDescription product={product} />
           </div>
         </Container>
       </main>
@@ -22,3 +23,49 @@ const ProductPage = () => {
 };
 
 export default ProductPage;
+
+export async function getStaticPaths() {
+  try {
+    const res = await fetch(`${url}/products?populate=*`);
+    const { data } = await res.json();
+
+    const paths = data.map(({ id }) => ({
+      params: { id: id.toString() },
+    }));
+
+    console.log(typeof paths[0].params.id);
+    return { paths, fallback: "blocking" };
+  } catch (e) {
+    console.warn(e.message);
+    return { props: {} };
+  }
+}
+
+export async function getStaticProps({ params }) {
+  try {
+    const res = await fetch(`${url}/products/${params.id}?populate=*`);
+    const { data } = await res.json();
+
+    const product = [data].map(({ id, attributes }) => ({
+      id,
+      product_description: attributes.product_description,
+      product_in_stock: attributes.product_in_stock,
+      product_name: attributes.product_name,
+      product_price: attributes.product_price.toFixed(2),
+      product_img: attributes.product_img.data.map((img) => ({
+        name: img.attributes.name,
+        url: img.attributes.url,
+      })),
+      categories: attributes.categories.data.map((category) => ({
+        id: category.id,
+        name: category.attributes.name,
+      })),
+    }));
+
+    return { props: { product: product[0] } };
+  } catch (e) {
+    console.warn(e.message);
+
+    return { props: {} };
+  }
+}

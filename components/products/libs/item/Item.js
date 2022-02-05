@@ -22,7 +22,7 @@ export const Item = ({ product, onClick }) => {
       <div className="px-5 pb-5">
         <h3 className="text-[24px] font-medium">{product.product_name}</h3>
         <p className="mb-5 ">£{product.product_price}</p>
-        <p>{product.product_description}</p>
+        <p>{product.product_description.substring(0, 200)}</p>
       </div>
     </div>
   );
