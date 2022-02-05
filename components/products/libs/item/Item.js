@@ -1,11 +1,6 @@
 import Image from "next/image";
 
 export const Item = ({ product, onClick }) => {
-  // Generates random number for mocking
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
-
   return (
     <div
       onClick={onClick}
@@ -13,7 +8,7 @@ export const Item = ({ product, onClick }) => {
     >
       <div className="relative h-[300px]">
         <Image
-          src={product.product_img[getRandomInt(3)].url} // Mocking
+          src={product.product_img[0].url}
           alt={product.product_img[0].name}
           layout="fill"
           objectFit="contain"
