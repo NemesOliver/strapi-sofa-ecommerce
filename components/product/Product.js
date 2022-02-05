@@ -1,10 +1,17 @@
+import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { ColorPicker } from "./libs";
 import { IoArrowBackOutline as ArrowBack } from "react-icons/io5";
 
 export const Product = ({ product }) => {
+  const [imageIndex, setImageIndex] = useState(0);
   const router = useRouter();
+
+  // Set image index to be equal to the clicked button index
+  const changeImage = (buttonIndex) => {
+    setImageIndex(buttonIndex);
+  };
 
   return (
     <section>
@@ -16,13 +23,13 @@ export const Product = ({ product }) => {
       </button>
       <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[500px]">
         <Image
-          src={product.product_img[2].url}
+          src={product.product_img[imageIndex].url}
           alt="mock picture"
           layout="fill"
           objectFit="contain"
         />
       </div>
-      <ColorPicker />
+      <ColorPicker colors={product.product_img} changeImage={changeImage} />
     </section>
   );
 };

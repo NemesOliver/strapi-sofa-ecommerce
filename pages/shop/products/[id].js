@@ -55,6 +55,7 @@ export async function getStaticProps({ params }) {
       product_img: attributes.product_img.data.map((img) => ({
         name: img.attributes.name,
         url: img.attributes.url,
+        color: img.attributes.caption,
       })),
       categories: attributes.categories.data.map((category) => ({
         id: category.id,
