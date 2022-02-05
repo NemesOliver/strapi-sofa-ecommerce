@@ -1,13 +1,16 @@
 import Image from "next/image";
 
-export const Item = ({ product }) => {
+export const Item = ({ product, onClick }) => {
   // Generates random number for mocking
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
 
   return (
-    <div className="min-w-full max-h-[600px] cursor-pointer rounded-md border border-background hover:border hover:shadow-lg hover:border-primary transition-all">
+    <div
+      onClick={onClick}
+      className="min-w-full max-h-[600px] cursor-pointer rounded-md border border-background hover:border hover:shadow-lg hover:border-primary transition-all"
+    >
       <div className="relative h-[300px]">
         <Image
           src={product.product_img[getRandomInt(3)].url} // Mocking

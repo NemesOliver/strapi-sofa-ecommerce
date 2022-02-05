@@ -1,12 +1,10 @@
 import Head from "next/head";
-import { Container, Sidebar, Products } from "../../components";
-import url from "../../strapi_url/url";
+import { Container, Sidebar, Products } from "../../../components";
+import url from "../../../strapi_url/url";
 
-import productsMock from "../../products.json";
+import productsMock from "../../../products.json";
 
 const products = ({ products }) => {
-  console.log(products[0]);
-
   return (
     <>
       <Head>
@@ -17,7 +15,7 @@ const products = ({ products }) => {
       <main>
         <Container>
           {/* Grid */}
-          <div className="grid grid-cols-[1fr] sm:grid-cols-[240px_1fr] ">
+          <div className="grid grid-cols-[1fr] sm:grid-cols-[240px_1fr]">
             <Sidebar />
             <Products products={products} />
           </div>
