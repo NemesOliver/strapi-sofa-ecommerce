@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import url from "../../strapi_url/url";
-
-// Strapi login endpoint
-const authUrl = `${url}/auth/local`;
+import { strapi } from "../../libs";
 
 export const useAuth = () => {
   const [user, setUser] = useState(null);
@@ -28,7 +24,10 @@ export const useAuth = () => {
   const login = async (identifier, password) => {
     try {
       // Request to strapi, returns user and jwt, identifier could be email or username
-      const { data } = await axios.post(authUrl, { identifier, password });
+      const { data } = await strapi.post("/auth/local", {
+        identifier,
+        password,
+      });
 
       // Save user
       setUser(data.user);

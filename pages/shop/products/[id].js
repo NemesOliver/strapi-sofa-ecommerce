@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Container, Product, ProductDescription } from "../../../components";
-import url from "../../../strapi_url/url";
+import { strapi } from "../../../libs";
 
 const ProductPage = ({ product }) => {
   return (
@@ -26,14 +26,12 @@ export default ProductPage;
 
 export async function getStaticPaths() {
   try {
-    const res = await fetch(`${url}/products?populate=*`);
-    const { data } = await res.json();
+    const { data } = await strapi("/products?populate=*");
 
-    const paths = data.map(({ id }) => ({
+    const paths = data.data.map(({ id }) => ({
       params: { id: id.toString() },
     }));
 
-    console.log(typeof paths[0].params.id);
     return { paths, fallback: "blocking" };
   } catch (e) {
     console.warn(e.message);
@@ -43,10 +41,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   try {
-    const res = await fetch(`${url}/products/${params.id}?populate=*`);
-    const { data } = await res.json();
+    const { data } = await strapi(`/products/${params.id}?populate=*`);
 
-    const product = [data].map(({ id, attributes }) => ({
+    const product = [data.data].map(({ id, attributes }) => ({
       id,
       product_description: attributes.product_description,
       product_in_stock: attributes.product_in_stock,

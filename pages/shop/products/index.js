@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Container, Sidebar, Products } from "../../../components";
-import url from "../../../strapi_url/url";
+import { strapi } from "../../../libs";
 
 const products = ({ products }) => {
   return (
@@ -27,11 +27,10 @@ export default products;
 
 export async function getStaticProps() {
   try {
-    const res = await fetch(`${url}/products?populate=*`);
-    const { data } = await res.json();
+    const { data } = await strapi("/products?populate=*");
 
     // Clean-up response
-    const products = data.map(({ id, attributes }) => ({
+    const products = data.data.map(({ id, attributes }) => ({
       id,
       product_description: attributes.product_description,
       product_in_stock: attributes.product_in_stock,
