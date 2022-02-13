@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import Link from "next/link";
-import { Input } from "../components";
+import { Input, LoadingButton } from "../components";
 import { AuthContext } from "../context";
 
 const Login = () => {
@@ -41,9 +41,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button className="w-full px-2 py-1.5 bg-primary rounded-sm mt-10">
-              {isLoading ? "LOADING..." : "LOG IN"}
-            </button>
+            <LoadingButton isLoading={isLoading} text="log in" />
           </form>
         </div>
       </main>
