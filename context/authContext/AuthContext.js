@@ -38,7 +38,7 @@ export const AuthContextProvider = ({ children }) => {
 
       // Save user
       setUser(data.user);
-
+      setIsLoggedIn(true);
       setIsLoading(false);
 
       // Store jwt in cookies
