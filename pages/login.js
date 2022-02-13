@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import Link from "next/link";
+import { Input } from "../components";
 import { AuthContext } from "../context";
 
 const Login = () => {
@@ -25,27 +26,23 @@ const Login = () => {
           </Link>
           <form onSubmit={handleSubmit} className="mt-20">
             <div className="flex flex-col text-left">
-              <label htmlFor="username">Username or email</label>
-              <input
-                className="border rounded-sm border-primary focus:outline-primary px-2 py-1.5"
+              <Input
+                label="Username or email"
                 type="text"
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
-                id="username"
               />
             </div>
             <div className="flex flex-col text-left mt-4">
-              <label htmlFor="password">Password</label>
-              <input
-                className="border rounded-sm border-primary focus:outline-primary px-2 py-1.5"
+              <Input
+                label="Password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                id="password"
               />
             </div>
             <button className="w-full px-2 py-1.5 bg-primary rounded-sm mt-10">
-              {isLoading ? 'LOADING...' : 'LOG IN'}
+              {isLoading ? "LOADING..." : "LOG IN"}
             </button>
           </form>
         </div>

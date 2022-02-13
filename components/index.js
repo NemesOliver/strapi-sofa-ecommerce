@@ -7,3 +7,4 @@ export * from "./product";
 export * from "./product_description";
 export * from "./container";
 export * from "./buttons";
+export * from "./input";
