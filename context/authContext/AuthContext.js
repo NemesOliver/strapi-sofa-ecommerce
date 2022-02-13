@@ -5,6 +5,7 @@ export const AuthContext = createContext({});
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
@@ -24,6 +25,8 @@ export const AuthContextProvider = ({ children }) => {
 
   // 1. LOG IN USER BY CALLING STRAPI API
   const login = async (identifier, password) => {
+    setIsLoading(true);
+
     try {
       // Request to strapi, returns user and jwt, identifier could be email or username
       const { data } = await strapi.post("/auth/local", {
@@ -34,10 +37,13 @@ export const AuthContextProvider = ({ children }) => {
       // Save user
       setUser(data.user);
 
+      setIsLoading(false);
+
       // Store jwt in cookies
       const token = `jwt=Bearer ${data.jwt}`;
       document.cookie = token;
     } catch (e) {
+      setIsLoading(false);
       console.warn(e.message);
     }
   };
@@ -50,7 +56,9 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ login, logout, user, isLoggedIn }}>
+    <AuthContext.Provider
+      value={{ login, logout, user, isLoggedIn, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -5,7 +5,7 @@ import { AuthContext } from "../context";
 const Login = () => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useContext(AuthContext);
+  const { login, isLoading } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +45,7 @@ const Login = () => {
               />
             </div>
             <button className="w-full px-2 py-1.5 bg-primary rounded-sm mt-10">
-              LOG IN
+              {isLoading ? 'LOADING...' : 'LOG IN'}
             </button>
           </form>
         </div>
