@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import { Header, Navigation } from "../../components";
+import { Header, Navigation, Snackbar } from "../../components";
 import { useNavigation } from "./libs";
 
 export const Layout = ({ children }) => {
@@ -16,6 +16,7 @@ export const Layout = ({ children }) => {
         {navOpen && <Navigation closeNavigation={closeNavigation} />}
       </AnimatePresence>
       {children}
+      <Snackbar time={3000} />
     </>
   );
 };

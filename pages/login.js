@@ -1,16 +1,32 @@
 import { useContext, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Input, LoadingButton } from "../components";
-import { AuthContext } from "../context";
+import { AuthContext, SnackbarContext } from "../context";
 
 const Login = () => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
-  const { login, isLoading } = useContext(AuthContext);
+  const { login, isLoading, error } = useContext(AuthContext);
+  const { triggerSnackbar } = useContext(SnackbarContext);
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Simple input validation
+    if (!identifier || !password) {
+      triggerSnackbar("All fields are required!", "red");
+      return;
+    }
+
     login(identifier, password);
+    router.back();
+
+    // If invalid credentials
+    if (error) {
+      triggerSnackbar("Username or Password invalid!", "red");
+    }
   };
 
   return (
