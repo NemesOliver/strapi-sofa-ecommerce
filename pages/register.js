@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 import { Input, LoadingButton } from "../components";
 import { AuthContext, SnackbarContext } from "../context";
 
-const Login = () => {
-  const [identifier, setIdentifier] = useState("");
+const Register = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, isLoading, error } = useContext(AuthContext);
+  const { registerNewUser, isLoading, error } = useContext(AuthContext);
   const { triggerSnackbar } = useContext(SnackbarContext);
   const router = useRouter();
 
@@ -15,18 +15,18 @@ const Login = () => {
     e.preventDefault();
 
     // Basic input validation
-    if (!identifier || !password) {
+    if (!email || !password) {
       triggerSnackbar("All fields are required!", "red");
       return;
     }
 
     // If everything's fine log user in and navigate back
-    login(identifier, password);
+    registerNewUser(email, password);
     router.back();
 
-    // If invalid credentials or connection error happens
+    // If connection error happens
     if (error) {
-      triggerSnackbar("Username or Password invalid!", "red");
+      triggerSnackbar("Oops! Something went wrong!", "red");
     }
   };
 
@@ -34,20 +34,18 @@ const Login = () => {
     <>
       <main className="h-[calc(100vh-60px)] grid place-content-center text-center">
         <div className="max-w-[450px]">
-          <h3 className="text-[36px] font-medium">
-            Please log in to continue.
-          </h3>
+          <h3 className="text-[36px] font-medium">Create new account.</h3>
           <p className="text-[24px] font font-medium ">or</p>
-          <Link href="/register" passHref>
-            <a className="text-[24px] text-[#4890FB] ">Create an account</a>
+          <Link href="/login" passHref>
+            <a className="text-[24px] text-[#4890FB] ">Log in</a>
           </Link>
           <form onSubmit={handleSubmit} className="mt-20">
             <div className="flex flex-col text-left">
               <Input
-                label="Username or email"
+                label="Email"
                 type="text"
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="flex flex-col text-left mt-4">
@@ -58,11 +56,11 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <LoadingButton isLoading={isLoading} text="log in" />
+            <LoadingButton isLoading={isLoading} text="Create account" />
           </form>
         </div>
       </main>
     </>
   );
 };
-export default Login;
+export default Register;

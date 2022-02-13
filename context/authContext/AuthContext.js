@@ -59,9 +59,45 @@ export const AuthContextProvider = ({ children }) => {
     document.cookie = `jwt=;expires=${new Date(0).toUTCString()}`;
   };
 
+  // 3. REGISTER NEW USER
+  const registerNewUser = async (email, password) => {
+    setIsLoading(true);
+    setError(false);
+
+    try {
+      // Register new strapi user
+      const { data } = await strapi.post("/auth/local/register", {
+        email,
+        password,
+      });
+
+      // Save user
+      setUser(data.user);
+      setIsLoggedIn(true);
+      setIsLoading(false);
+
+      // Store jwt in cookies
+      const token = `jwt=Bearer ${data.jwt}`;
+      document.cookie = token;
+    } catch (e) {
+      setIsLoading(false);
+      setError(true);
+
+      console.warn(e.message);
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ login, logout, user, isLoggedIn, isLoading, error }}
+      value={{
+        registerNewUser,
+        login,
+        logout,
+        user,
+        isLoggedIn,
+        isLoading,
+        error,
+      }}
     >
       {children}
     </AuthContext.Provider>
