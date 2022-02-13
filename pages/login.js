@@ -30,7 +30,7 @@ const Login = () => {
               />
             </div>
             <button className="w-full px-2 py-1.5 bg-primary rounded-sm mt-10">
-              submit
+              LOG IN
             </button>
           </form>
         </div>
