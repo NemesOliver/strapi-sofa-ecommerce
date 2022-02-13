@@ -14,16 +14,17 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Simple input validation
+    // Basic input validation
     if (!identifier || !password) {
       triggerSnackbar("All fields are required!", "red");
       return;
     }
 
+    // If everything's fine log user in and navigate back
     login(identifier, password);
     router.back();
 
-    // If invalid credentials
+    // If invalid credentials or connection error happens
     if (error) {
       triggerSnackbar("Username or Password invalid!", "red");
     }
