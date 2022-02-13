@@ -1,9 +1,20 @@
+import { useContext, useState } from "react";
 import Link from "next/link";
+import { AuthContext } from "../context";
 
 const Login = () => {
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(identifier, password);
+  };
+
   return (
     <>
-      <main className="h-[calc(100vh-60px)] grid place-content-center text-center  ">
+      <main className="h-[calc(100vh-60px)] grid place-content-center text-center">
         <div className="max-w-[450px]">
           <h3 className="text-[36px] font-medium">
             Please log in to continue.
@@ -12,12 +23,14 @@ const Login = () => {
           <Link href="#" passHref>
             <a className="text-[24px] text-[#4890FB] ">Create an account</a>
           </Link>
-          <form className="mt-20">
+          <form onSubmit={handleSubmit} className="mt-20">
             <div className="flex flex-col text-left">
               <label htmlFor="username">Username or email</label>
               <input
                 className="border rounded-sm border-primary focus:outline-primary px-2 py-1.5"
                 type="text"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
                 id="username"
               />
             </div>
@@ -26,6 +39,8 @@ const Login = () => {
               <input
                 className="border rounded-sm border-primary focus:outline-primary px-2 py-1.5"
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 id="password"
               />
             </div>

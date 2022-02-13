@@ -1,10 +1,11 @@
 import { createContext, useState, useEffect } from "react";
+import { strapi } from "../../libs";
 
 export const AuthContext = createContext({});
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
     if (typeof document !== "undefined") {
