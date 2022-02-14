@@ -1,4 +1,5 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
+import { createContext, useState, useEffect } from "react";
 import { strapi } from "../../libs";
 
 export const AuthContext = createContext({});
@@ -8,6 +9,7 @@ export const AuthContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [error, setError] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof document !== "undefined") {
@@ -31,7 +33,7 @@ export const AuthContextProvider = ({ children }) => {
 
     try {
       // Request to strapi, returns user and jwt, identifier could be email or username
-      const { data } = await strapi.post("/auth/local", {
+      const {data} = await strapi.post("/auth/local", {
         identifier,
         password,
       });
@@ -40,6 +42,8 @@ export const AuthContextProvider = ({ children }) => {
       setUser(data.user);
       setIsLoggedIn(true);
       setIsLoading(false);
+
+      router.back();
 
       // Store jwt in cookies
       const token = `jwt=Bearer ${data.jwt}`;
@@ -65,7 +69,6 @@ export const AuthContextProvider = ({ children }) => {
     setError(false);
 
     try {
-      // Register new strapi user
       const { data } = await strapi.post("/auth/local/register", {
         email,
         password,
@@ -75,6 +78,8 @@ export const AuthContextProvider = ({ children }) => {
       setUser(data.user);
       setIsLoggedIn(true);
       setIsLoading(false);
+
+      router.push("/shop/products");
 
       // Store jwt in cookies
       const token = `jwt=Bearer ${data.jwt}`;

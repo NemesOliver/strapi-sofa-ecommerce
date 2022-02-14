@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { Input, LoadingButton } from "../components";
 import { AuthContext, SnackbarContext } from "../context";
 
@@ -9,7 +8,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { login, isLoading, error } = useContext(AuthContext);
   const { triggerSnackbar } = useContext(SnackbarContext);
-  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,14 +18,8 @@ const Login = () => {
       return;
     }
 
-    // If everything's fine log user in and navigate back
+    // If everything's fine log user in
     login(identifier, password);
-    router.back();
-
-    // If invalid credentials or connection error happens
-    if (error) {
-      triggerSnackbar("Username or Password invalid!", "red");
-    }
   };
 
   return (

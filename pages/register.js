@@ -1,15 +1,13 @@
 import { useContext, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { Input, LoadingButton } from "../components";
 import { AuthContext, SnackbarContext } from "../context";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { registerNewUser, isLoading, error } = useContext(AuthContext);
+  const { registerNewUser, isLoading } = useContext(AuthContext);
   const { triggerSnackbar } = useContext(SnackbarContext);
-  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,14 +18,9 @@ const Register = () => {
       return;
     }
 
-    // If everything's fine log user in and navigate back
+    // If everything's fine register user 
     registerNewUser(email, password);
-    router.back();
-
-    // If connection error happens
-    if (error) {
-      triggerSnackbar("Oops! Something went wrong!", "red");
-    }
+    triggerSnackbar("Your account was succesfuly created.", "green");
   };
 
   return (
