@@ -4,6 +4,7 @@ import { AuthContext } from "../../context";
 import { IconButton } from "..";
 import { CgMenuRight as MenuOpen } from "react-icons/cg";
 import { IoClose as MenuClose } from "react-icons/io5";
+import { BsCart4 as ShoppingCart } from "react-icons/bs";
 
 export const Header = ({ navOpen, toggleNavigation, closeNavigation }) => {
   const { isLoggedIn, logout } = useContext(AuthContext);
@@ -28,6 +29,13 @@ export const Header = ({ navOpen, toggleNavigation, closeNavigation }) => {
             Log In
           </a>
         </Link>
+      )}
+      {isLoggedIn && (
+        <div className="pr-3">
+          <IconButton>
+            <ShoppingCart size={20} />
+          </IconButton>
+        </div>
       )}
 
       <IconButton onClick={toggleNavigation}>
